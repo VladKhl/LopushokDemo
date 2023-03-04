@@ -24,7 +24,8 @@ namespace LopushokDemo
         public MainWindow()
         {
             InitializeComponent();
-            frame.Content = new ProductPage();
+            frame.Navigate(new ProductPage());
+            App.MainFrame = frame;
         }
     }
 }

@@ -95,14 +95,13 @@ namespace LopushokDemo.Pages
                 for (int i = 0; i < prod.Count / pageSize; i++)
                 {
                     Button button = new Button();
+                    button.FontSize = 18;
                     button.Content = i + 1;
                     button.Click += Button_Click;
-                    button.Margin = new Thickness(0, 5, 0, 5);
                     button.Width = 25;
                     button.Height = 25;
                     button.BorderBrush = Brushes.White;
                     button.Background = Brushes.White;
-                    button.FontSize = 8;
                     WPButtons.Children.Add(button);
                 }
             }
@@ -111,14 +110,13 @@ namespace LopushokDemo.Pages
                 for (int i = 0; i < prod.Count / pageSize; i++)
                 {
                     Button button = new Button();
+                    button.FontSize = 18;
                     button.Content = i + 1;
                     button.Click += Button_Click;
-                    button.Margin = new Thickness(0, 5, 0, 5);
                     button.Width = 25;
                     button.Height = 25;
                     button.BorderBrush = Brushes.White;
                     button.Background = Brushes.White;
-                    button.FontSize = 8;
                     WPButtons.Children.Add(button);
                 }
             }
@@ -155,14 +153,13 @@ namespace LopushokDemo.Pages
 
         private void PaperLst_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //InsertListWindow insertwin = new InsertListWindow();
-            //insertwin.Show();
+            var q = PaperLst.SelectedItem as Product;
+            App.MainFrame.Navigate(new AddAndEditPage(q));
         }
 
         private void btn_add_Click(object sender, RoutedEventArgs e)
         {
-            //AddListWindow add = new AddListWindow();
-            //add.Show();
+            App.MainFrame.Navigate(new AddAndEditPage(null));
         }
 
         private void SortCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
