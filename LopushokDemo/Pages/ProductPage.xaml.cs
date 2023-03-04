@@ -167,17 +167,15 @@ namespace LopushokDemo.Pages
 
         private void SortCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (SortCB.SelectedIndex == -1)
+                return;
             if (SortCB.SelectedIndex == 0)
             {
-                PaperLst.ItemsSource = App.lopushokDBEntities.Product.ToList();
-                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(PaperLst.ItemsSource);
-                view.SortDescriptions.Add(new SortDescription("Product.MinCostForAgent", ListSortDirection.Ascending));
+                PaperLst.ItemsSource = App.lopushokDBEntities.Product.OrderBy(x=> x.MinCostForAgent).ToList();
             }
             else if (SortCB.SelectedIndex == 1)
             {
-                PaperLst.ItemsSource = App.lopushokDBEntities.Product.ToList();
-                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(PaperLst.ItemsSource);
-                view.SortDescriptions.Add(new SortDescription("Product.MinCostForAgent", ListSortDirection.Descending));
+                PaperLst.ItemsSource = App.lopushokDBEntities.Product.OrderByDescending(x => x.MinCostForAgent).ToList();
             }
         }
 
@@ -193,8 +191,10 @@ namespace LopushokDemo.Pages
             if (result == MessageBoxResult.Yes)
             {
                 try
-                {
-                    App.lopushokDBEntities.Product.Remove(q);
+                { 
+                    var deleteItem = App.lopushokDBEntities.Product.Where(x => x.Id_Prod == q.Id_Prod).FirstOrDefault();
+                    App.lopushokDBEntities.MaterialsAndProducts.RemoveRange(App.lopushokDBEntities.MaterialsAndProducts.Where(x => x.Id_Prod == q.Id_Prod));
+                    App.lopushokDBEntities.Product.Remove(deleteItem);
                     App.lopushokDBEntities.SaveChanges();
                     PaperLst.ItemsSource = App.lopushokDBEntities.Product.ToList();
                     MessageBox.Show("Успешно");

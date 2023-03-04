@@ -11,11 +11,33 @@
     Width="900"
     Height="600"
     ResizeMode="NoResize"
+    FontFamily=" Gabriola"
     Background="#FFFFFF"
+    Icon="/Pictures/icon.ico"
         >
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="1*" />
+            <RowDefinition
+                Height="6*" />
+        </Grid.RowDefinitions>
         <Frame
             Name="frame"
-            NavigationUIVisibility="Hidden" />
+            NavigationUIVisibility="Hidden"
+            Grid.Row="1"/>
+        <Canvas
+            Grid.Row="0"
+            Margin="320,0,320,0">
+            <StackPanel
+                Orientation="Horizontal"
+                >
+                <Image
+                    Source="/Pictures/logo.jpg" Height="80"/>
+                <TextBlock
+                    Text="Lopushok"
+                    FontSize="50" />
+            </StackPanel>
+        </Canvas>
     </Grid>
 </Window>
